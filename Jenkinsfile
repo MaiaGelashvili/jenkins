@@ -1,6 +1,6 @@
 pipeline {
   agent any
-  { docker { image 'maven:3.9.0-eclipse-temurin-11' } }
+  
   stages {
     stage('parallel stages') {
       parallel {
@@ -14,7 +14,7 @@ pipeline {
             steps {
                 sh 'mvn --version'
             }
-        }
+        
         
       }
       }
