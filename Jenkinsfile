@@ -10,22 +10,22 @@ pipeline {
         }
 
         stage('maven version') {
-         steps {
-    sh "mvn -N help:effective-pom -Doutput=target/pom-effective.xml"
+          steps {
+            sh 'mvn -N help:effective-pom -Doutput=target/pom-effective.xml'
+            script {
+              pom = readMavenPom(file: 'target/pom-effective.xml')
+              projectArtifactId = pom.getArtifactId()
+              projectGroupId = pom.getGroupId()
+              projectVersion = pom.getVersion()
+              projectName = pom.getName()
+            }
 
-    script {
-        pom = readMavenPom(file: 'target/pom-effective.xml')
-        projectArtifactId = pom.getArtifactId()
-        projectGroupId = pom.getGroupId()
-        projectVersion = pom.getVersion()
-        projectName = pom.getName()
-    }
-
-    echo "Building ${projectArtifactId}:${projectVersion}"
-         }
-      
+            echo "Building ${projectArtifactId}:${projectVersion}"
+          }
         }
+
       }
     }
+
   }
 }
