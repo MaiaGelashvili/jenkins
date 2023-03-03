@@ -1,6 +1,5 @@
 pipeline {
   agent any
-  
   stages {
     stage('parallel stages') {
       parallel {
@@ -9,14 +8,13 @@ pipeline {
             bat 'mvn clean test'
           }
         }
-        
-      stage('build') {
-            steps {
-                sh 'mvn --version'
-            }
-        
-        
-      }
+
+        stage('build') {
+          steps {
+            sh 'mvn --version'
+          }
+        }
+
       }
     }
 
