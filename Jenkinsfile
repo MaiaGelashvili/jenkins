@@ -20,7 +20,6 @@ pipeline {
 
   }
   environment {
-    IMAGE = readMavenPom().getArtifactId()
     VERSION = readMavenPom().getVersion()
   }
 }
