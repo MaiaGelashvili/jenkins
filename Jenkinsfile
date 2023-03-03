@@ -11,7 +11,7 @@ pipeline {
 
         stage('maven version') {
           steps {
-            sh 'mvn -version'
+            sh 'mvn -N help:effective-pom -Doutput=pom-effective.xml'
             script {
               pom = readMavenPom(file: 'pom.xml')
               projectArtifactId = pom.getArtifactId()
