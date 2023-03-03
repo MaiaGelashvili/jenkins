@@ -1,5 +1,6 @@
 pipeline {
   agent any
+  { docker { image 'maven:3.9.0-eclipse-temurin-11' } }
   stages {
     stage('parallel stages') {
       parallel {
@@ -8,16 +9,13 @@ pipeline {
             bat 'mvn clean test'
           }
         }
-
-        stage('info') {
-          steps {
-            script {
-              def version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
-              def artifactId = sh script: 'mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout', returnStdout: true
+        
+      stage('build') {
+            steps {
+                sh 'mvn --version'
             }
-
-          }
         }
+        
 
       }
     }
