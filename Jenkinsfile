@@ -9,19 +9,15 @@ pipeline {
           }
         }
 
-        stage('info')
-    {
-        steps
-        {
-            script
-            {
-                def version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
-                def artifactId = sh script: 'mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout', returnStdout: true
-                
+        stage('info') {
+          steps {
+            script {
+              def version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
+              def artifactId = sh script: 'mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout', returnStdout: true
             }
 
+          }
         }
-    }
 
       }
     }
