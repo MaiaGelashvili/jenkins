@@ -1,5 +1,12 @@
 pipeline {
   agent any
+      environment {
+    //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
+    IMAGE = readMavenPom().getArtifactId()
+    VERSION = readMavenPom().getVersion()
+    }
+
+
   stages {
     stage('parallel stages') {
       parallel {
@@ -9,15 +16,11 @@ pipeline {
           }
         }
 
-        stage('Build') {
-          steps {
-            sh 'mvn --batch-mode -U deploy'
-            script {
-              TAG_SELECTOR = readMavenPom().getVersion()
+         stage('Test') {
+            steps {
+                echo "${VERSION}"
             }
 
-            echo "TAG_SELECTOR=${TAG_SELECTOR}"
-          }
         }
 
       }
